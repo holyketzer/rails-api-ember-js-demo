@@ -1,0 +1,1 @@
+TimeZoneApp.ApplicationController = Ember.Controller.extend()
