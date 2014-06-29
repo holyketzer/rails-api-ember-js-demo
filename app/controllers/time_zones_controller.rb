@@ -1,0 +1,2 @@
+class TimeZonesController < ApplicationController
+end
