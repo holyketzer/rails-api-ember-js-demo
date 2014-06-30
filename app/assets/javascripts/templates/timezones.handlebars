@@ -1,10 +1,4 @@
-Name: </br>
-{{view Ember.TextField valueBinding='name'}} </br>
-City: </br>
-{{view Ember.TextField valueBinding='city'}} </br>
-GMT: </br>
-{{view Ember.TextField valueBinding='gmt'}} </br>
-<button {{action addTimezone}}>Add time zone</button>
+{{view App.NewTimezoneView}}
 
 {{#each controller}}
   <div>

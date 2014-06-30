@@ -1,8 +1,7 @@
 # For more information see: http://emberjs.com/guides/routing/
 
-TimeZoneApp.Router.map ()->
-  # @resource('posts')
+App.Router.map ()->
   @route 'timezones', path: '/'
 
-TimeZoneApp.TimezonesRoute = Ember.Route.extend
-  setupController: (controller) -> controller.set('content', [])
+App.TimezonesRoute = Ember.Route.extend
+  model: -> this.store.find('timezone')

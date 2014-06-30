@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20140629202501) do
 
-  create_table "time_zones", force: true do |t|
+  create_table "timezones", force: true do |t|
     t.string   "name"
     t.string   "city"
     t.integer  "gmt"

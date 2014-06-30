@@ -6,4 +6,4 @@
 #= require time_zone_app
 
 # for more details see: http://emberjs.com/guides/application/
-window.TimeZoneApp = Ember.Application.create()
+window.App = Ember.Application.create()
