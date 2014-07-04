@@ -1,5 +1,5 @@
 App.NewTimezoneView = Ember.View.extend
-  templateName: 'new_timezone'
+  templateName: 'timezones/form'
   tagName: 'form'
 
   submit: ->
