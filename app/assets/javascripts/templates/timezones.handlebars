@@ -1,9 +1,10 @@
 {{view App.NewTimezoneView}}
 
-{{#each controller}}
+{{#each itemController="timezone"}}
   <div>
     <span>{{name}}</span>
     <span>{{city}}</span>
     <span>{{gmt}}</span>
+    <button {{action 'removeTimezone'}} class='btn'>Delete</button>
   </div>
 {{/each}}
