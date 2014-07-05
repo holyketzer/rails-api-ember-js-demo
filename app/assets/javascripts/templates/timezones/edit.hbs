@@ -1,0 +1,13 @@
+{{#if controller.isNew}}
+  <h1>New time zone</h1>
+{{else}}
+  <h1>Edit time zone</h1>
+{{/if}}
+
+{{partial 'timezones/form'}}
+
+<p>
+  <button {{action updateItem this}}>
+    Save
+  </button>
+</p>
