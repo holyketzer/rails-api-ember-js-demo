@@ -1,8 +1,10 @@
 App.TimezonesEditController = Ember.ObjectController.extend
   actions:
     updateItem: (timezone) ->
-      timezone.save().then =>
-        @transitionTo('timezones')
+      timezone.save().then(
+        => @transitionToRoute('timezones')
+        (response) ->
+      )
       #@get('target').transitionTo('timezones')
 
   isNew: Em.computed ->

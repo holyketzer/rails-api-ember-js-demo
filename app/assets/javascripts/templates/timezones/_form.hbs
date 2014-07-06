@@ -1,6 +1,24 @@
+{{#if isError}}
+  <p>There was an error saving the record</p>
+{{/if}}
+{{#unless isValid}}
+  <div>Time zone isn't valid</div>
+{{/unless}}
+
 Name: </br>
+{{#each error in errors.name}}
+  <div>{{error.message}}</div>
+{{/each}}
 {{view Ember.TextField valueBinding='name'}} </br>
+
 City: </br>
+{{#each error in errors.city}}
+  <div>{{error.message}}</div>
+{{/each}}
 {{view Ember.TextField valueBinding='city'}} </br>
+
 GMT: </br>
+{{#each error in errors.gmt}}
+  <div>{{error.message}}</div>
+{{/each}}
 {{view Ember.TextField valueBinding='gmt'}} </br>

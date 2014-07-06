@@ -11,11 +11,20 @@ class Api::TimezonesController < ApplicationController
 
   def create
     @timezone = Timezone.create(timezone_params)
-    respond_with @timezone, location: api_timezone_url(@timezone)
+    if @timezone.valid?
+      respond_with @timezone, location: api_timezone_url(@timezone)
+    else
+      render json: { errors: @timezone.errors }, status: 422
+    end
   end
 
   def update
-    respond_with Timezone.update(params[:id], timezone_params)
+    @timezone = Timezone.update(params[:id], timezone_params)
+    if @timezone.valid?
+      respond_with @timezone
+    else
+      render json: { errors: @timezone.errors }, status: 422
+    end
   end
 
   def destroy
