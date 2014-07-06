@@ -25,8 +25,8 @@ App.TimezonesNewRoute = Ember.Route.extend
       @controllerFor('timezones.edit').removeRecordIfEmpty()
       true
 
-App.LocationsEditRoute = Ember.Route.extend
-  setupController: (controller, model) ->
-      @controllerFor('timezones.edit').setProperties(content: model)
-
-  renderTemplate: -> @render 'timezones.edit', into: 'application'
+App.TimezonesEditRoute = Ember.Route.extend
+  actions:
+    willTransition: (transition) ->
+      @controllerFor('timezones.edit').cancelChangesIfDirty()
+      true

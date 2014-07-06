@@ -12,3 +12,5 @@ App.TimezonesEditController = Ember.ObjectController.extend
   .property('id')
 
   removeRecordIfEmpty: -> @content.deleteRecord() if @get('isNew')
+
+  cancelChangesIfDirty: -> @content.rollback() if @content.get('isDirty')
