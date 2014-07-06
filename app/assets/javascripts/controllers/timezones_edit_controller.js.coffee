@@ -1,8 +1,12 @@
 App.TimezonesEditController = Ember.ObjectController.extend
-  updateItem: (timezone) ->
-    timezone.save()
-    @get('target').transitionTo('timezones')
+  actions:
+    updateItem: (timezone) ->
+      timezone.save().then =>
+        @transitionTo('timezones')
+      #@get('target').transitionTo('timezones')
 
   isNew: Em.computed ->
     !@get('content').get('id')
   .property('id')
+
+  removeRecordIfEmpty: -> @content.deleteRecord() if @get('isNew')
