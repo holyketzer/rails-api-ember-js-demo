@@ -1,0 +1,45 @@
+<div class='form-horizontal'>
+  <legend>Registration</legend>
+    {{#if errorMsg}}
+      <div class='alert alert-error'>
+          {{errorMsg}}
+      </div>
+    {{/if}}
+    {{#unless isValid}}
+      <div class='alert alert-error'>User details aren't valid</div>
+    {{/unless}}
+
+  <div class='control-group'>
+    <label class='control-label' for='email'>Email</label>
+    <div class='controls'>
+      {{#each error in errors.email}}
+        <div>{{error}}</div>
+      {{/each}}
+      {{view Em.TextField valueBinding='email' id='email'}}
+    </div>
+  </div>
+  <div class='control-group'>
+    <label class='control-label' for='password'>Password</label>
+    <div class='controls'>
+      {{#each error in errors.password}}
+        <div>{{error}}</div>
+      {{/each}}
+      {{view Ember.TextField valueBinding='password' type='password' id='password'}}
+      <br/>
+      (at least 6 chars)
+    </div>
+  </div>
+  <div class='control-group'>
+    <label class='control-label' for='password_confirmation'>Confirm Password</label>
+    <div class='controls'>
+      {{#each error in errors.password_confirmation}}
+        <div>{{error}}</div>
+      {{/each}}
+      {{view Ember.TextField valueBinding='password_confirmation' type='password' id='password_confirmation'}}
+    </div>
+  </div>
+  <div class='form-actions'>
+    <input {{action 'register'}} type='submit' class='btn btn-primary' value='Register' />
+    <input {{action 'cancel'}} type='submit' class='btn' value='Cancel' />
+  </div>
+</div>
