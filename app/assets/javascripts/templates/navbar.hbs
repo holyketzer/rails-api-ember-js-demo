@@ -1,0 +1,19 @@
+<div class='navbar navbar-fixed-top'>
+  <div class='navbar-inner'>
+    <div class='container-fluid'>
+      <div class='brand strong'>{{#link-to 'application'}}Time zones app{{/link-to}}</div>
+      <ul class='nav'>
+          <li>{{#link-to 'application'}}About{{/link-to}}</li>
+      </ul>
+      <div class='btn-group pull-right'>
+        {{#if isAuthenticated}}
+            Logged as {{currentUserEmail}}
+            <button class='btn' {{action logout}}>Logout</button>
+        {{else}}
+            {{view App.MenuItem href='#/login' label='Login' }}
+            {{view App.MenuItem href='#/registration' label='Register'}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
