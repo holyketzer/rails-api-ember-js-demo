@@ -1,6 +1,8 @@
 class Api::TimezonesController < ApplicationController
   respond_to :json
 
+  before_action :authenticate_user!
+
   def index
     respond_with Timezone.all
   end

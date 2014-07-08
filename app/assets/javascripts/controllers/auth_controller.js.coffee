@@ -10,7 +10,7 @@ App.AuthController = Ember.ObjectController.extend
         'user[email]': route.currentModel.email
         'user[password]': route.currentModel.password
       success: (data) ->
-        me.set 'currentUser', data
+        me.set 'currentUser', data.user
         route.transitionTo '/'
       error: (jqXHR, textStatus, errorThrown) ->
         if jqXHR.status == 401
