@@ -53,6 +53,6 @@ App.AuthController = Ember.ObjectController.extend
         $('meta[name="csrf-token"]').attr('content', data['csrf-token'])
         $('meta[name="csrf-param"]').attr('content', data['csrf-param'])
         me.set 'currentUser', null
-        me.transitionToRoute '/'
+        me.transitionToRoute 'about'
       error: (jqXHR, textStatus, errorThrown) ->
         alert "Error logging out: #{errorThrown}"

@@ -9,6 +9,7 @@ App.Router.map ()->
     @route 'edit', path: ':timezone_id'
 
 App.TimezonesRoute = Ember.Route.extend
+  beforeModel: -> App.authorize(this)
   model: -> this.store.find('timezone')
   renderTemplate: -> into:'application'
 
