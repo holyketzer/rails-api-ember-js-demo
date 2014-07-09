@@ -4,15 +4,15 @@ class Api::TimezonesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    respond_with Timezone.all
+    respond_with current_user.timezones
   end
 
   def show
-    respond_with Timezone.find(params[:id])
+    respond_with current_user.timezones.find(params[:id])
   end
 
   def create
-    @timezone = Timezone.create(timezone_params)
+    @timezone = current_user.timezones.create(timezone_params)
     if @timezone.valid?
       respond_with @timezone, location: api_timezone_url(@timezone)
     else
@@ -21,7 +21,8 @@ class Api::TimezonesController < ApplicationController
   end
 
   def update
-    @timezone = Timezone.update(params[:id], timezone_params)
+    @timezone = current_user.timezones.find(params[:id])
+    @timezone.update_attributes(timezone_params)
     if @timezone.valid?
       respond_with @timezone
     else
@@ -30,7 +31,8 @@ class Api::TimezonesController < ApplicationController
   end
 
   def destroy
-    respond_with Timezone.destroy(params[:id])
+    @timezone = current_user.timezones.find(params[:id])
+    respond_with @timezone.destroy
   end
 
   private

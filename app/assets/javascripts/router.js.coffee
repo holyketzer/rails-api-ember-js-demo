@@ -42,8 +42,10 @@ App.LoginRoute = Ember.Route.extend
     cancel: -> @transitionTo '/'
 
 App.RegistrationRoute = Ember.Route.extend
-  model: -> Ember.Object.create({isValid: true, password: '', password_confirmation: ''})
-  setupController: -> @transitionTo '/' if @controllerFor('auth').get('isAuthenticated')
+  model: -> Ember.Object.create({isValid: true, email: '', password: '', password_confirmation: ''})
+  setupController: (controller, model) ->
+    controller.set 'content', model
+    @transitionTo '/' if @controllerFor('auth').get('isAuthenticated')
   actions:
     register: -> @controllerFor('auth').register this
     cancel: -> @transitionTo '/'
