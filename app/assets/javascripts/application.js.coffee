@@ -5,9 +5,14 @@
 #= require ember-data
 #= require_self
 #= require timezone_app
+#= require bootstrap-sprockets
 
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create()
+
+App.reopen
+  currentPath: ''
+  isMainPage: Ember.computed 'currentPath', -> @get('currentPath') == 'timezones.index'
 
 App.urls ||= {}
 App.urls.login = "/users/sign_in.json"

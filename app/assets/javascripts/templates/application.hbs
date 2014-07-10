@@ -1,7 +1,18 @@
-{{render 'navbar'}}
-<br />
+<div class='container'>
+  {{render 'navbar'}}
 
-{{outlet}}
 
-<br />
-<div>Footer</div>
+      <div class='jumbotron'>
+        {{outlet}}
+      </div>
+
+  <footer>
+    <div class='navbar navbar-default' role='navigation'>
+      <div class='row'>
+        <div class='text-center copy'>
+           <span class='glyphicon glyphicon-wrench'></span> &nbsp; Alex Emelyanov © 2014
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

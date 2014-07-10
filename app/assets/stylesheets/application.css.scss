@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+@import 'bootstrap-sprockets';
+@import 'bootstrap-custom';
+
+.container {
+  margin-top: 15px;
+}
+
+.copy {
+  margin-top: 14px;
+}

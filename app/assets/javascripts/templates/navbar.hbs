@@ -1,19 +1,35 @@
-<div class='navbar navbar-fixed-top'>
-  <div class='navbar-inner'>
-    <div class='container-fluid'>
-      <div class='brand strong'>{{#link-to 'application'}}Time zones app{{/link-to}}</div>
-      <ul class='nav'>
-          <li>{{#link-to 'about'}}About{{/link-to}}</li>
-      </ul>
-      <div class='btn-group pull-right'>
-        {{#if isAuthenticated}}
-            Logged as {{currentUserEmail}}
-            <button class='btn' {{action logout}}>Logout</button>
-        {{else}}
-            {{view App.MenuItem href='#/login' label='Login' }}
-            {{view App.MenuItem href='#/registration' label='Register'}}
-        {{/if}}
-      </div>
+<div class='navbar navbar-default' role='navigation'>
+  <div class='container-fluid'>
+    <div class='navbar-header'>
+      <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+        <span class='sr-only'>Toggle navigation</span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+        <span class='icon-bar'></span>
+      </button>
     </div>
-  </div>
+    <div class='navbar-collapse collapse'>
+      <ul class='nav navbar-nav'>
+        <li {{bind-attr class='App.isMainPage:active'}}>
+          {{#link-to 'application' class='navbar-brand'}}<span class='glyphicon glyphicon-home'></span> &nbsp; Time zones app{{/link-to}}
+        </li>
+        {{#link-to 'about' tagName='li'}}
+          <a href='#'><span class='glyphicon glyphicon-question-sign'></span> &nbsp; About</a>
+        {{/link-to}}
+      </ul>
+      <ul class='nav navbar-nav navbar-right'>
+        {{#if isAuthenticated}}
+            <li class='active'><a>{{currentUserEmail}}</a></li>
+            <li><a {{action 'logout'}} href='#'>Logout &nbsp;<span class='glyphicon glyphicon-arrow-right'></span> </a></li>
+        {{else}}
+            {{#link-to 'login' tagName='li'}}
+              <a href='#'><span class='glyphicon glyphicon-arrow-right'></span> &nbsp; Login</a>
+            {{/link-to}}
+            {{#link-to 'registration' tagName='li'}}
+              <a href='#'><span class='glyphicon glyphicon-plus'></span> &nbsp; Sign up</a>
+            {{/link-to}}
+        {{/if}}
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container-fluid -->
 </div>
