@@ -11,6 +11,8 @@ App.TimezonesEditController = Ember.ObjectController.extend
     !@get('content').get('id')
   .property('id')
 
+  gmts: Em.computed -> { text: App.formatGmt(i), value: i } for i in [-12..12]
+
   removeRecordIfEmpty: -> @content.deleteRecord() if @get('isNew')
 
   cancelChangesIfDirty: -> @content.rollback() if @content.get('isDirty')

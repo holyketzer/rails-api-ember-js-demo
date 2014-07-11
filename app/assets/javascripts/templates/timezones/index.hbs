@@ -12,7 +12,7 @@
       <tr>
         <td>{{name}}</td>
         <td>{{city}}</td>
-        <td>{{gmt}}</td>
+        <td>{{gmtFormatted}}</td>
         <td class='last'>
           {{#link-to 'timezones.edit' this class='btn btn-warning'}}Edit{{/link-to}}
           <button {{action 'removeTimezone'}} class='btn btn-danger'>Delete</button>
@@ -23,4 +23,3 @@
 </table>
 
 {{#link-to 'timezones.new' class='btn btn-success'}}Add time zone{{/link-to}}
-

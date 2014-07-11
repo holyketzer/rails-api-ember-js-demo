@@ -3,3 +3,5 @@ App.initApp = (currentUser) ->
 
 App.authorize = (route) ->
   route.transitionTo 'login' unless route.controllerFor('auth').get('isAuthenticated')
+
+App.formatGmt = (gmt) -> "GMT#{if gmt >= 0 then '+' else ''}#{gmt}"

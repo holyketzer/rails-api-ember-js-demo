@@ -27,6 +27,6 @@
     {{#each error in errors.gmt}}
       <span class='help-block'>{{error.message}}</span>
     {{/each}}
-    {{view Ember.TextField valueBinding='gmt' class='form-control'}}
+    {{view Ember.Select content=gmts optionValuePath='content.value' optionLabelPath='content.text' value=gmt class='form-control'}}
   </div>
 </div>
