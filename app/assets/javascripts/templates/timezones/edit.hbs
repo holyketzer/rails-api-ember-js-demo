@@ -1,13 +1,13 @@
 {{#if controller.isNew}}
-  <h1>New time zone</h1>
+  <legend>New time zone</legend>
 {{else}}
-  <h1>Edit time zone</h1>
+  <legend>Edit time zone</legend>
 {{/if}}
 
 {{partial 'timezones/form'}}
 
 <p>
-  <button {{action updateItem this}}>
+  <button {{action updateItem this}} class='btn btn-success'>
     Save
   </button>
 </p>

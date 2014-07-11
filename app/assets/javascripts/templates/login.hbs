@@ -1,22 +1,25 @@
-<form {{action login content on='submit'}} class='form-horizontal'>
-  <legend>Login</legend>
-    {{#if errorMsg}}
-      <div class='alert alert-error'>
-        {{errorMsg}}
-      </div>
-    {{/if}}
-  <div class='control-group'>
+<legend>Login</legend>
+<form {{action login content on='submit'}} role='form' class='form'>
+  {{#if errorMsg}}
+    <div class='alert alert-danger'>
+      {{errorMsg}}
+    </div>
+  {{/if}}
+
+
+  <div class='form-group'>
     <label class='control-label' for='email'>Email</label>
     <div class='controls'>
-      {{view Em.TextField valueBinding='email' id='email'}}
+      {{view Em.TextField valueBinding='email' id='email' type='email' class='form-control' }}
     </div>
   </div>
-  <div class='control-group'>
+  <div class='form-group'>
     <label class='control-label' for='password'>Password</label>
     <div class='controls'>
-      {{view Ember.TextField valueBinding='password' type='password' id='password'}}
+      {{view Ember.TextField valueBinding='password' type='password' id='password' class='form-control'}}
     </div>
   </div>
+
   <div class='form-actions'>
     <button  type='submit' class='btn btn-primary' value='Login'>Login</button>
     <input {{action cancel}} type='submit' class='btn' value='Cancel' />

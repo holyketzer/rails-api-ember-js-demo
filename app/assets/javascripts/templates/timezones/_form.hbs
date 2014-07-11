@@ -1,24 +1,32 @@
-{{#if isError}}
-  <p>There was an error saving the record</p>
-{{/if}}
-{{#unless isValid}}
-  <div>Time zone isn't valid</div>
-{{/unless}}
+<div role='form' class='form'>
+  {{#if isError}}
+    <div class='alert alert-danger'>There was an error saving the record</div>
+  {{/if}}
+  {{#unless isValid}}
+    <div class='alert alert-danger'>Time zone isn't valid</div>
+  {{/unless}}
 
-Name: </br>
-{{#each error in errors.name}}
-  <div>{{error.message}}</div>
-{{/each}}
-{{view Ember.TextField valueBinding='name'}} </br>
+  <div {{bind-attr class=':form-group errors.name:has-error'}}>
+    <label class='control-label' for='name'>Name</label>
+    {{#each error in errors.name}}
+      <span class='help-block'>{{error.message}}</span>
+    {{/each}}
+    {{view Ember.TextField valueBinding='name' class='form-control'}}
+  </div>
 
-City: </br>
-{{#each error in errors.city}}
-  <div>{{error.message}}</div>
-{{/each}}
-{{view Ember.TextField valueBinding='city'}} </br>
+  <div {{bind-attr class=':form-group errors.city:has-error'}}>
+    <label class='control-label' for='city'>City</label>
+    {{#each error in errors.city}}
+      <span class='help-block'>{{error.message}}</span>
+    {{/each}}
+    {{view Ember.TextField valueBinding='city' class='form-control'}}
+  </div>
 
-GMT: </br>
-{{#each error in errors.gmt}}
-  <div>{{error.message}}</div>
-{{/each}}
-{{view Ember.TextField valueBinding='gmt'}} </br>
+  <div {{bind-attr class=':form-group errors.gmt:has-error'}}>
+    <label class='control-label' for='gmt'>GMT</label>
+    {{#each error in errors.gmt}}
+      <span class='help-block'>{{error.message}}</span>
+    {{/each}}
+    {{view Ember.TextField valueBinding='gmt' class='form-control'}}
+  </div>
+</div>

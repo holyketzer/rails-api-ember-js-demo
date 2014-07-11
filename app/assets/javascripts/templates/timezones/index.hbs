@@ -1,11 +1,26 @@
-{{#each itemController="timezone"}}
-  <div>
-    <span>{{name}}</span>
-    <span>{{city}}</span>
-    <span>{{gmt}}</span>
-    {{#link-to 'timezones.edit' this class='btn'}}Edit{{/link-to}}
-    <button {{action 'removeTimezone'}} class='btn'>Delete</button>
-  </div>
-{{/each}}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>City</th>
+      <th>GMT</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each itemController="timezone"}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{city}}</td>
+        <td>{{gmt}}</td>
+        <td class='last'>
+          {{#link-to 'timezones.edit' this class='btn btn-warning'}}Edit{{/link-to}}
+          <button {{action 'removeTimezone'}} class='btn btn-danger'>Delete</button>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
 
-{{#link-to 'timezones.new'}}Add time zone{{/link-to}}
+{{#link-to 'timezones.new' class='btn btn-success'}}Add time zone{{/link-to}}
+
