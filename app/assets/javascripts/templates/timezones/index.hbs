@@ -4,6 +4,7 @@
       <th>Name</th>
       <th>City</th>
       <th>GMT</th>
+      <th>Current time</th>
       <th></th>
     </tr>
   </thead>
@@ -13,6 +14,7 @@
         <td>{{name}}</td>
         <td>{{city}}</td>
         <td>{{gmtFormatted}}</td>
+        <td>{{currentTime}}</td>
         <td class='last'>
           {{#link-to 'timezones.edit' this class='btn btn-warning'}}Edit{{/link-to}}
           <button {{action 'removeTimezone'}} class='btn btn-danger'>Delete</button>

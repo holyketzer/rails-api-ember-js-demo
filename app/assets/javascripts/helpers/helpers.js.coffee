@@ -4,4 +4,10 @@ App.initApp = (currentUser) ->
 App.authorize = (route) ->
   route.transitionTo 'login' unless route.controllerFor('auth').get('isAuthenticated')
 
-App.formatGmt = (gmt) -> "GMT#{if gmt >= 0 then '+' else ''}#{gmt}"
+App.formatGmt = (gmt) ->
+  sign = switch
+    when gmt > 0 then '+'
+    when gmt < 0 then '-'
+    else ' '
+  leadZero = if Math.abs(gmt) < 10 then '0' else ''
+  "GMT #{sign}#{leadZero}#{Math.abs(gmt)}:00"

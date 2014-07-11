@@ -5,7 +5,6 @@ App.TimezonesEditController = Ember.ObjectController.extend
         => @transitionToRoute('timezones')
         (response) ->
       )
-      #@get('target').transitionTo('timezones')
 
   isNew: Em.computed ->
     !@get('content').get('id')

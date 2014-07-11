@@ -6,6 +6,7 @@
 #= require_self
 #= require timezone_app
 #= require bootstrap-sprockets
+#= require moment
 
 # for more details see: http://emberjs.com/guides/application/
 window.App = Ember.Application.create()
