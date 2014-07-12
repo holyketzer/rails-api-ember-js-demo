@@ -53,5 +53,6 @@ App.AuthController = Ember.ObjectController.extend
         $('meta[name="csrf-param"]').attr('content', data['csrf-param'])
         me.set 'currentUser', null
         me.transitionToRoute 'about'
+        me.store.unloadAll('timezone')
       error: (jqXHR, textStatus, errorThrown) ->
         alert "Error logging out: #{errorThrown}"
