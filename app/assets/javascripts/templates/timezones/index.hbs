@@ -1,4 +1,24 @@
-<table class="table">
+<legend>Time zones</legend>
+<div class='row'>
+  <div class='col-md-6'>
+    <div class='input-group'>
+      <span class="input-group-addon">
+        <span class='glyphicon glyphicon-search'></span>
+        &nbsp; Find
+      </span>
+      {{view Ember.TextField valueBinding='nameFilter' class='form-control'}}
+      <span class='input-group-btn'>
+        <button {{action 'clearFilter'}} class='btn btn-default' type='button'>
+          &nbsp;
+          <span class='glyphicon glyphicon-remove'></span>
+          &nbsp;
+        </button>
+      </span>
+    </div><!-- /input-group -->
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<table class='table offset'>
   <thead>
     <tr>
       <th>Name</th>
@@ -9,7 +29,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each itemController="timezone"}}
+    {{#each zone in filterComputed itemController='timezone'}}
       <tr>
         <td>{{name}}</td>
         <td>{{city}}</td>
