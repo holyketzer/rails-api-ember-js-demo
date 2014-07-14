@@ -2,13 +2,16 @@ class Api::TimezonesController < ApplicationController
   respond_to :json
 
   before_action :authenticate_user!
+  before_action :load_timezone, only: [:show, :update, :destroy]
+
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     respond_with current_user.timezones
   end
 
   def show
-    respond_with current_user.timezones.find(params[:id])
+    respond_with @timezone
   end
 
   def create
@@ -21,7 +24,6 @@ class Api::TimezonesController < ApplicationController
   end
 
   def update
-    @timezone = current_user.timezones.find(params[:id])
     @timezone.update_attributes(timezone_params)
     if @timezone.valid?
       respond_with @timezone
@@ -31,7 +33,6 @@ class Api::TimezonesController < ApplicationController
   end
 
   def destroy
-    @timezone = current_user.timezones.find(params[:id])
     respond_with @timezone.destroy
   end
 
@@ -39,5 +40,13 @@ class Api::TimezonesController < ApplicationController
 
   def timezone_params
     params.require(:timezone).permit(:name, :city, :gmt)
+  end
+
+  def load_timezone
+    @timezone = current_user.timezones.find(params[:id])
+  end
+
+  def record_not_found
+    render text: '404 Not Found', status: 404
   end
 end

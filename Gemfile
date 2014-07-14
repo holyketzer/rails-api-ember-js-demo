@@ -31,8 +31,15 @@ gem 'devise'
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'json_spec'
   gem 'shoulda-matchers'
 end
 
-gem 'rails_12factor', group: :production
-gem 'pg', group: :production
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
