@@ -32,6 +32,11 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'capybara'
+  #gem 'capybara-webkit'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
+  gem 'launchy'
 end
 
 group :test do

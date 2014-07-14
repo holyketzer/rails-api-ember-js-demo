@@ -11,7 +11,7 @@
     {{#each error in errors.name}}
       <span class='help-block'>{{error.message}}</span>
     {{/each}}
-    {{view Ember.TextField valueBinding='name' class='form-control'}}
+    {{view Ember.TextField valueBinding='name' class='form-control' name='name'}}
   </div>
 
   <div {{bind-attr class=':form-group errors.city:has-error'}}>
@@ -19,7 +19,7 @@
     {{#each error in errors.city}}
       <span class='help-block'>{{error.message}}</span>
     {{/each}}
-    {{view Ember.TextField valueBinding='city' class='form-control'}}
+    {{view Ember.TextField valueBinding='city' class='form-control' name='city'}}
   </div>
 
   <div {{bind-attr class=':form-group errors.gmt:has-error'}}>
@@ -27,6 +27,6 @@
     {{#each error in errors.gmt}}
       <span class='help-block'>{{error.message}}</span>
     {{/each}}
-    {{view Ember.Select content=gmts optionValuePath='content.value' optionLabelPath='content.text' value=gmt class='form-control'}}
+    {{view Ember.Select content=gmts optionValuePath='content.value' optionLabelPath='content.text' value=gmt class='form-control'  name='gmt'}}
   </div>
 </div>
