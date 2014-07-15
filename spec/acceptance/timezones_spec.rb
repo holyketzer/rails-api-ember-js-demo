@@ -7,6 +7,7 @@ feature 'User can manage time zones', %q{
  } do
   context 'user', js: true do
     let!(:user) { create(:user) }
+    let!(:timezone) { create(:timezone, user: user) }
 
     background do
       login_as user
@@ -15,28 +16,72 @@ feature 'User can manage time zones', %q{
     scenario 'creates new time zone' do
       timezone = build(:timezone)
 
-      #visit '#/new'
       click_on 'Add time zone'
-      #sleep 10
-      #save_and_open_page
+
+      #expect(current_ember_path).to eq '/new'
       expect(page).to have_content 'New time zone'
 
-      fill_in 'name', with: timezone.name
-      fill_in 'city', with: timezone.city
-      select format_gmt(timezone.gmt), from: 'gmt'
-
+      fill_form(timezone)
       click_on 'Save'
 
-      expect(current_path).to eq '/'
+      #expect(current_ember_path).to eq '/'
       within '.timezones' do
-        expect(page).to have_content timezone.name
-        expect(page).to have_content timezone.city
-        expect(page).to have_content format_gmt(timezone.gmt)
+        expect_timezone(timezone)
+      end
+    end
+
+    scenario 'updates existing time zone' do
+      new_timezone = build(:timezone)
+
+      within "#timezone-#{timezone.id}" do
+        click_on 'Edit'
+      end
+
+      #expect(current_ember_path).to eq "/#{timezone.id}"
+      fill_form(new_timezone)
+      click_on 'Save'
+
+      #expect(current_ember_path).to eq '/'
+      within "#timezone-#{timezone.id}" do
+        expect_timezone(new_timezone)
+      end
+    end
+
+    scenario 'deletes existing timezone' do
+      within "#timezone-#{timezone.id}" do
+        page.evaluate_script('window.confirm = function() { return true; }')
+        click_on 'Delete'
+      end
+
+      expect(page).to_not have_css("#timezone-#{timezone.id}")
+    end
+
+    context 'with invalid input data' do
+      scenario 'creates time zone with empty fields' do
+        click_on 'Add time zone'
+        click_on 'Save'
+
+        expect(current_ember_path).to eq '/new'
+        within('.alert') { expect(page).to have_content "Time zone isn't valid" }
+        within('.name-field') { expect(page).to have_content "can't be blank" }
+        within('.city-field') { expect(page).to have_content "can't be blank" }
       end
     end
   end
 
   def format_gmt(gmt)
     "GMT #{ sprintf('%+03d', gmt)}:00"
+  end
+
+  def fill_form(timezone)
+    fill_in 'name', with: timezone.name
+    fill_in 'city', with: timezone.city
+    select format_gmt(timezone.gmt), from: 'gmt'
+  end
+
+  def expect_timezone(timezone)
+    expect(page).to have_content timezone.name
+    expect(page).to have_content timezone.city
+    expect(page).to have_content format_gmt(timezone.gmt)
   end
 end

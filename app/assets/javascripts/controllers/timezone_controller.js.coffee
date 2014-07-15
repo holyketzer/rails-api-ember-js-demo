@@ -6,3 +6,5 @@ App.TimezoneController = Ember.ObjectController.extend
         timezone.destroyRecord()
 
   currentTime: Em.computed 'gmt', 'clock.second', -> moment().zone(-@get('gmt')).format('MMMM Do YYYY, hh:mm:ss a')
+
+  htmlId: Em.computed 'id', -> "timezone-#{@get('id')}"

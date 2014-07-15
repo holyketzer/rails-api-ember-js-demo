@@ -30,7 +30,7 @@
   </thead>
   <tbody>
     {{#each zone in filterComputed itemController='timezone'}}
-      <tr>
+      <tr {{bind-attr id='htmlId'}}>
         <td>{{name}}</td>
         <td>{{city}}</td>
         <td>{{gmtFormatted}}</td>

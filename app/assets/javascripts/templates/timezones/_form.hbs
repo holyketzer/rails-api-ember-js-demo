@@ -6,7 +6,7 @@
     <div class='alert alert-danger'>Time zone isn't valid</div>
   {{/unless}}
 
-  <div {{bind-attr class=':form-group errors.name:has-error'}}>
+  <div {{bind-attr class=':form-group :name-field errors.name:has-error'}}>
     <label class='control-label' for='name'>Name</label>
     {{#each error in errors.name}}
       <span class='help-block'>{{error.message}}</span>
@@ -14,7 +14,7 @@
     {{view Ember.TextField valueBinding='name' class='form-control' name='name'}}
   </div>
 
-  <div {{bind-attr class=':form-group errors.city:has-error'}}>
+  <div {{bind-attr class=':form-group :city-field errors.city:has-error'}}>
     <label class='control-label' for='city'>City</label>
     {{#each error in errors.city}}
       <span class='help-block'>{{error.message}}</span>
@@ -22,7 +22,7 @@
     {{view Ember.TextField valueBinding='city' class='form-control' name='city'}}
   </div>
 
-  <div {{bind-attr class=':form-group errors.gmt:has-error'}}>
+  <div {{bind-attr class=':form-group :name-gmt errors.gmt:has-error'}}>
     <label class='control-label' for='gmt'>GMT</label>
     {{#each error in errors.gmt}}
       <span class='help-block'>{{error.message}}</span>
