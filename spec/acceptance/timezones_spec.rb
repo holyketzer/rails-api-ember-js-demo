@@ -9,7 +9,11 @@ feature 'User can manage time zones', %q{
     let!(:user) { create(:user) }
     let!(:timezone) { create(:timezone, user: user) }
 
-    background do
+    let!(:another_user) { create(:user) }
+    let!(:another_timezone) { create(:timezone, user: another_user) }
+    let!(:second_timezone) { create(:timezone, user: user) }
+
+    before do
       login_as user
     end
 
@@ -18,13 +22,11 @@ feature 'User can manage time zones', %q{
 
       click_on 'Add time zone'
 
-      #expect(current_ember_path).to eq '/new'
       expect(page).to have_content 'New time zone'
 
       fill_form(timezone)
       click_on 'Save'
 
-      #expect(current_ember_path).to eq '/'
       within '.timezones' do
         expect_timezone(timezone)
       end
@@ -37,11 +39,9 @@ feature 'User can manage time zones', %q{
         click_on 'Edit'
       end
 
-      #expect(current_ember_path).to eq "/#{timezone.id}"
       fill_form(new_timezone)
       click_on 'Save'
 
-      #expect(current_ember_path).to eq '/'
       within "#timezone-#{timezone.id}" do
         expect_timezone(new_timezone)
       end
@@ -54,6 +54,14 @@ feature 'User can manage time zones', %q{
       end
 
       expect(page).to_not have_css("#timezone-#{timezone.id}")
+    end
+
+    scenario 'sees all timezones' do
+      [timezone, second_timezone].each do |t|
+        within("#timezone-#{t.id}") { expect_timezone(t) }
+      end
+
+      expect(page).to_not have_css("#timezone-#{another_timezone.id}")
     end
 
     context 'with invalid input data' do
