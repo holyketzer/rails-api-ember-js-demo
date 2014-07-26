@@ -12,12 +12,9 @@ describe 'Time zones API' do
   end
 
   context 'authorized' do
+    let!(:application) { create(:application) } # OAuth application
     let!(:user) { create(:user) }
-
-    before do
-      post 'users/sign_in.json', { 'user[email]' => user.email, 'user[password]' => user.password }
-      expect(response.status).to eq 201
-    end
+    let!(:token) { create(:access_token, application: application, resource_owner_id: user.id).token }
 
     describe 'GET index' do
       let!(:another_user) { create(:user) }
@@ -26,7 +23,7 @@ describe 'Time zones API' do
       let!(:another_timezone) { create(:timezone, user: another_user) }
 
       before do
-        get '/api/timezones', format: :json
+        get '/api/timezones', format: :json, access_token: token
       end
 
       it 'returns 200 status code' do
@@ -43,7 +40,7 @@ describe 'Time zones API' do
       let(:timezone) { build(:timezone) }
 
       before do
-        post '/api/timezones', timezone: { name: timezone.name, city: timezone.city, gmt: timezone.gmt }, format: :json
+        post '/api/timezones', timezone: { name: timezone.name, city: timezone.city, gmt: timezone.gmt }, format: :json, access_token: token
       end
 
       it 'returns 201 status code' do
@@ -60,7 +57,7 @@ describe 'Time zones API' do
       let!(:new_timezone) { build(:timezone) }
 
       before do
-        put "/api/timezones/#{timezone.id}", timezone: { name: new_timezone.name, city: new_timezone.city, gmt: new_timezone.gmt }, format: :json
+        put "/api/timezones/#{timezone.id}", timezone: { name: new_timezone.name, city: new_timezone.city, gmt: new_timezone.gmt }, format: :json, access_token: token
       end
 
       it 'returns 204 status code' do
@@ -68,7 +65,7 @@ describe 'Time zones API' do
       end
 
       it 'updates record' do
-        get "/api/timezones/#{timezone.id}"
+        get "/api/timezones/#{timezone.id}", access_token: token
 
         expect(response.status).to eq 200
         expect(response.body).to be_json_eql(new_timezone.to_json(root: true)).excluding('user_id')
@@ -79,7 +76,7 @@ describe 'Time zones API' do
       let!(:timezone) { create(:timezone, user: user) }
 
       before do
-        delete "/api/timezones/#{timezone.id}", format: :json
+        delete "/api/timezones/#{timezone.id}", format: :json, access_token: token
       end
 
       it 'returns 204 status code' do
@@ -87,7 +84,7 @@ describe 'Time zones API' do
       end
 
       it 'deletes record' do
-        get "/api/timezones/#{timezone.id}"
+        get "/api/timezones/#{timezone.id}", access_token: token
 
         expect(response.status).to eq 404
       end

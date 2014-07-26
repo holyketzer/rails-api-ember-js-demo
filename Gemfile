@@ -27,6 +27,7 @@ gem 'spring', group: :development
 
 gem 'ember-rails'
 gem 'devise'
+gem 'doorkeeper'
 
 group :development, :test do
   gem 'sqlite3'

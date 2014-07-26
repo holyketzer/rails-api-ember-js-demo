@@ -1,16 +1,21 @@
 App.AuthController = Ember.ObjectController.extend
-  currentUser:  null
-  isAuthenticated: Em.computed.notEmpty('currentUser.email')
+  email:  null
+  accessToken: null
+  isAuthenticated: Em.computed.notEmpty('email')
   login: (route) ->
     me = @
     $.ajax
       url: App.urls.login
       type: 'POST'
       data:
-        'user[email]': route.currentModel.email
-        'user[password]': route.currentModel.password
+        'username': route.currentModel.email
+        'password': route.currentModel.password
+        'grant_type': 'password'
+      email: route.currentModel.email
       success: (data) ->
-        me.set 'currentUser', data.user
+        me.set 'email', @email
+        me.set 'accessToken', data.access_token
+        $.ajaxSetup(headers: { 'Authorization': "Basic #{window.btoa(data.access_token)}" })
         route.transitionTo '/'
       error: (jqXHR, textStatus, errorThrown) ->
         if jqXHR.status == 401
@@ -33,7 +38,7 @@ App.AuthController = Ember.ObjectController.extend
         'user[password]': route.currentModel.password
         'user[password_confirmation]': route.currentModel.password_confirmation
       success: (data) ->
-        me.set 'currentUser', data.user
+        me.set 'email', data.user.email
         route.transitionTo '/'
       error: (jqXHR, textStatus, errorThrown) ->
         if jqXHR.status == 422
@@ -51,7 +56,9 @@ App.AuthController = Ember.ObjectController.extend
       success: (data, textStatus, jqXHR) ->
         $('meta[name="csrf-token"]').attr('content', data['csrf-token'])
         $('meta[name="csrf-param"]').attr('content', data['csrf-param'])
-        me.set 'currentUser', null
+        $.ajaxSetup(headers: { })
+        me.set 'email', null
+        me.set 'accessToken', null
         me.transitionToRoute 'about'
         me.store.unloadAll('timezone')
       error: (jqXHR, textStatus, errorThrown) ->
