@@ -1,5 +1,6 @@
 App.initApp = (currentUser) ->
-  App.__container__.lookup('controller:auth').set 'email', currentUser.email
+  if currentUser.token
+    App.__container__.lookup('controller:auth').authorize(currentUser.email, currentUser.token)
 
 App.authorize = (route) ->
   route.transitionTo 'login' unless route.controllerFor('auth').get('isAuthenticated')

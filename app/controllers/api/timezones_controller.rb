@@ -1,7 +1,6 @@
 class Api::TimezonesController < ApplicationController
   respond_to :json
 
-  #before_action :authenticate_user!
   doorkeeper_for :all
   before_action :load_user
   before_action :load_timezone, only: [:show, :update, :destroy]
