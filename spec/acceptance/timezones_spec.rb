@@ -1,7 +1,7 @@
 require 'acceptance/acceptance_helper'
 
 feature 'User can manage time zones', %q{
-  In order get local time ni different places
+  In order to get local time in different places
   As an user
   I want to be able to manage time zones
  } do

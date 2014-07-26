@@ -10,7 +10,6 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |routes|
     u = User.find_for_database_authentication(email: params[:username])
-    puts "#{u.email} #{u.valid_password?(params[:password])}"
     u if u && u.valid_password?(params[:password])
   end
 
