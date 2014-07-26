@@ -18,30 +18,32 @@
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
 
-<table class='table offset timezones'>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>City</th>
-      <th>GMT</th>
-      <th>Current time</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each zone in filterComputed itemController='timezone'}}
-      <tr {{bind-attr id='htmlId'}}>
-        <td>{{name}}</td>
-        <td>{{city}}</td>
-        <td>{{gmtFormatted}}</td>
-        <td>{{currentTime}}</td>
-        <td class='last'>
-          {{#link-to 'timezones.edit' this class='btn btn-warning'}}Edit{{/link-to}}
-          <button {{action 'removeTimezone'}} class='btn btn-danger'>Delete</button>
-        </td>
+<div class='table-responsive'>
+  <table class='table offset timezones'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>GMT</th>
+        <th>Current time</th>
+        <th></th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each zone in filterComputed itemController='timezone'}}
+        <tr {{bind-attr id='htmlId'}}>
+          <td>{{name}}</td>
+          <td>{{city}}</td>
+          <td>{{gmtFormatted}}</td>
+          <td>{{currentTime}}</td>
+          <td class='last'>
+            {{#link-to 'timezones.edit' this class='btn btn-warning'}}Edit{{/link-to}}
+            <button {{action 'removeTimezone'}} class='btn btn-danger'>Delete</button>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
 
 {{#link-to 'timezones.new' class='btn btn-success'}}Add time zone{{/link-to}}

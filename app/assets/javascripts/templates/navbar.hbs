@@ -7,11 +7,12 @@
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
       </button>
+      {{#link-to 'application' class='navbar-brand'}}<span class='glyphicon glyphicon-home'></span> &nbsp; Time zones app{{/link-to}}
     </div>
     <div class='navbar-collapse collapse'>
       <ul class='nav navbar-nav'>
         <li {{bind-attr class='App.isMainPage:active'}}>
-          {{#link-to 'application' class='navbar-brand'}}<span class='glyphicon glyphicon-home'></span> &nbsp; Time zones app{{/link-to}}
+          {{#link-to 'application'}}<span class='glyphicon glyphicon-home'></span> &nbsp; Home{{/link-to}}
         </li>
         {{#link-to 'about' tagName='li'}}
           <a href='#'><span class='glyphicon glyphicon-question-sign'></span> &nbsp; About</a>
