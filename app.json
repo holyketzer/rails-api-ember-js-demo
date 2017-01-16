@@ -1,0 +1,15 @@
+{
+  "name": "rails-api-ember-js-demo",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}
